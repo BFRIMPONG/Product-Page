@@ -24,7 +24,11 @@ class ProductItem{
     addToCart () {
         // console.log('Adding to cart...');
         alert(JSON.stringify(this.product.title) + " added to cart");
-    }    
+    } 
+    
+    deleteItem () {
+        alert(JSON.stringify(this.product.title) + " deleted from cart");
+    }
 
     render() {
         const prodEl = document.createElement('li');
@@ -37,13 +41,15 @@ class ProductItem{
                     <h3>\$${this.product.price}</h3>
                     <p>${this.product.description}</p>
                     <button>Add to Cart</button>
-                    <button>Delete</button>
+                    <button id ="del">Delete</button>
 
                 </div>
             </div>
         `; 
         const addCartButton = prodEl.querySelector('button');
         addCartButton.addEventListener('click', this.addToCart.bind(this))
+        const deleteButton = prodEl.querySelector('#del');
+        deleteButton.addEventListener('click', this.deleteItem.bind(this))
         return prodEl;
 
     }
@@ -58,35 +64,35 @@ class ProductList {
            999.99,
            'Avaliable',
            'An IPhone 12 Pro',
-           'https://www.apple.com/iphone/',
+           'img/mobilephone.jpg',
         ),
         new Product(
             'Laptop',
             1320.00,
             'Avaliable',
             'HP Pavilion x360 Laptop touch - 14-dw0097nr',
-            'https://www.hp.com/us-en/shop/pdp/hp-pavilion-x360-laptop-14-dw0097nr',
+            'img/laptop.png',
          ),
         new Product(
             'Television',
             250.00,
             'Avaliable',
             'TCL andriod TV S6500 series',
-            'https://www.tcl.com/gh/en/products/s6500/s6500-49.html',
+            'img/tv.jpg',
         ),
         new Product(
             'Projector',
             999.99,
             'Avaliable',
             'An epson Home Cinema 2250 3LCD Full HD 1080p Projector',
-            'https://epson.com/For-Home/Projectors/Streaming-Entertainment/Home-Cinema-2250-3LCD-Full-HD-1080p-Projector/p/V11HA11020',
+            'img/projector.jpg',
         ),
         new Product(
             'Printer',
             129.99,
             'Avaliable',
             'HP DeskJet 2320 All-in-One Printer',
-            'https://ssl.www8.hp.com/emea_middle_east/en/products/printers/product-detail.html?oid=33691553#!tab=specs',
+            'img/printer.png',
          ),
     ]
 
