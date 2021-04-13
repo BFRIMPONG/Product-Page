@@ -50,12 +50,40 @@ button:active {
   border-color: #790fa3;
 }
 
+.del {
+  background-color: tomato;
+  color:white;
+  border: 1px solid tomato;
+}
+
+.del:focus {
+  outline: none;
+}
+
 .del:hover,
 .del:active {
-  background: red;
-  border-color: white;
+  background: rgb(243, 122, 100);
+  border-color: rgb(243, 122, 100);
 
 }
+
+.rem {
+  background-color: rgb(145, 26, 5);
+  color:white;
+  border: 1px solid rgb(145, 26, 5);
+}
+
+.del:focus {
+  outline: none;
+}
+
+.rem:hover,
+.rem:active {
+  background: rgb(221, 41, 10);
+  border-color: rgb(221, 41, 10);
+
+}
+
 
 .cart {
   margin: 5rem 2rem;
@@ -80,9 +108,9 @@ button:active {
 
 .product-item {
   margin: 2rem auto;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  width: 50rem;
-  max-width: 100%;
+  box-shadow: 3px 2px 8px rgba(0, 0, 0, 0.26);
+  width: 80vw;
+  /* max-width: 100%; */
   display: flex;;
  
 }
@@ -93,11 +121,17 @@ button:active {
   object-fit: cover;
 }
 
+.product-item img:hover{
+  width: 450px;
+  transition: 0.6;
+}
+
 .product-items_content {
   padding: 1rem;
-  text-align: center;
+  /* text-align: center; */
   padding-left: 1rem;
-  /* background-color: gray; */
+  border-left:1px solid #540075;
+  
 }
 
 .product-item h2,
@@ -107,4 +141,5 @@ button:active {
 
 .pro{
   display: flex;
+  border-radius: 5px;
 } 

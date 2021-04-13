@@ -70,6 +70,12 @@ class ShoppingCart extends Component {
         this.cartItems = updatedItems;
     }
 
+    deleteProduct(product) {
+        const updatedItems = [...this.items];
+        updatedItems.pop(product);
+        this.cartItems = updatedItems;
+    }
+
     removeProduct(product){
         
         const updatedItems = [...this.items];
@@ -77,7 +83,7 @@ class ShoppingCart extends Component {
         if (updatedItems.includes(product)) {
             updatedItems.pop(product);
             this.cartItems = updatedItems;
-            alert(JSON.stringify(product.title) + " deleted from cart");
+            alert(JSON.stringify(product.title) + " is being deleted from cart");
         }
         else{
             alert(JSON.stringify(product.title) + " is not in cart");
@@ -114,6 +120,12 @@ class ProductItem extends Component {
         ProductPage.removeProductFromCart(this.product);  
     }
 
+    deleteFromProduct() {
+        ProductPage.deleteFromProduct(this.product);
+        alert(JSON.stringify(this.product.title) + " is being deleted from the product list");
+
+    }
+
     render() {
         const prodEl = this.createRootElement ('li', 'product-item');
         prodEl.innerHTML = `
@@ -126,8 +138,8 @@ class ProductItem extends Component {
                     <h3>${this.product.stock}</h3>
                     
                     <button>Add to Cart</button>
-                    <button class ="del">Delete</button>
-
+                    <button class ="del">Remove from Cart</button>
+                    <button class ="rem">Delete</button>
                 </div>
             </div>
         `; 
@@ -139,6 +151,10 @@ class ProductItem extends Component {
             displayNumberOfItems();
         })
         deleteButton.addEventListener('click', displayNumberOfItems);
+        const remProdButton = prodEl.querySelector('.rem')
+        // remProdButton.addEventListener('click',this.deleteFromProduct.bind(this))
+        remProdButton.addEventListener('click', displayNumberOfItems)
+
     }
 }
 
@@ -148,38 +164,38 @@ class ProductList extends Component {
     
     products = [
         new Product(
-           'Mobile Phone',
+           'iPhone 12 Pro',
            999.99,
-           'Stock: Avaliable',
-           'An IPhone 12 Pro',
+           'Stock: Available',
+           'The phone comes with a 6.10-inch touchscreen display with a resolution of 1170x2532 pixels at a pixel density of 460 pixels per inch (ppi). The iPhone 12 Pro supports wireless charging, as well as proprietary fast charging.',
            'img/mobilephone.jpg',
         ),
         new Product(
-            'Laptop',
+            'HP Pavilion x360 Laptop',
             1320.00,
-            'Stock: Avaliable',
-            'HP Pavilion x360 Laptop touch - 14-dw0097nr',
+            'Stock: Available',
+            'Be free to create, share, and connect in more ways on a powerful convertible laptop designed to move with you. Streaming, chatting, and getting things done is way more fun when you find your perfect position. Flex, bend and flip from anywhere with a 360-degree hinge and long-lasting battery life.',
             'img/laptop.png',
          ),
         new Product(
-            'Television',
+            'TCL andriod TV',
             250.00,
-            'Stock: Avaliable',
-            'TCL andriod TV S6500 series',
+            'Stock: Available',
+            'More movies and games, music and photos, internet and apps are ready. With TCL Android TV™, discover a new worlds of entertainment with you and your family. ',
             'img/tv.jpg',
         ),
         new Product(
-            'Projector',
+            'Epson Full HD Projector',
             999.99,
             'Stock: Avaliable',
-            'An epson Home Cinema 2250 3LCD Full HD 1080p Projector',
+            'Why compromise for anything other than true 3LCD projection? Built from the ground up to deliver an exceptionally immersive viewing experience, the Epson Home Cinema 2250 displays vivid, true-to-life content with Best-in-Class Color Brightness1, advanced 3-chip, 3LCD technology and an amazing contrast ratio of up to 70,000:1. The perfect choice for streaming TV shows, sporting events, movies and more, this dynamic projector features Image Enhancement and Frame Interpolation for smooth, crisp images and accepts up to 4K content – for an astounding Full HD picture. Plus, with built-in Android TV2 and wireless connectivity, you get seamless access to popular streaming services including Hulu, HBO and YouTube™3, right out of the box.',
             'img/projector.jpg',
         ),
         new Product(
-            'Printer',
+            'HP DeskJet 2320 All-in-One Printer',
             129.99,
             'Stock: Avaliable',
-            'HP DeskJet 2320 All-in-One Printer',
+            'The simple way to get the essentials. With seamless setup from PC and dependable printing, you can handle your everyday printing, scanning, and copying needs with an affordable printer. Use HP Smart app for a simple setup, and you are ready to go.',
             'img/printer.png',
          ),
     ]
@@ -224,6 +240,9 @@ class ProductPage {
     static removeProductFromCart(product) {
         this.cart.removeProduct(product);
     }
+    static deleteFromProduct(product){
+        this.cart.removeProduct(product);
+    }
 }
 
 ProductPage.init();
@@ -235,22 +254,24 @@ ProductPage.init();
 
  
 //   delete functionality
-//   const prodArray = document.querySelectorAll('.product-item');
-//   const deleteProdButton = document.querySelectorAll('.del');
-//   console.log(deleteProdButton);
+  const prodArray = document.querySelectorAll('.product-item');
+  const deleteProdButton = document.querySelectorAll('.rem');
+  console.log(deleteProdButton);
   
-//   function deleteItem(buttonsClass, childClass){
-//     for(var i = 0; i < buttonsClass.length; i++){
+  function deleteItem(buttonsClass, childClass){
+    for(var i = 0; i < buttonsClass.length; i++){
   
-//       (function(child){
-//         buttonsClass[i].addEventListener('click', function(e){
-//           child.parentNode.removeChild(child);
-//         },false);
-//       })(childClass[i]);
-//     }
-//   }
+      (function(child){
+        buttonsClass[i].addEventListener('click', function(e){
+          child.parentNode.removeChild(child);
+        //   alert(JSON.stringify(this.product.title) + " is being deleted from the product list");
+        //   displayNumberOfItems();
+        },false);
+      })(childClass[i]);
+    }
+  }
   
-//   deleteItem(deleteProdButton, prodArray);
+  deleteItem(deleteProdButton, prodArray);
 
   function displayNumberOfItems(){
     const span = document.querySelector("#number");
