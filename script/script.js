@@ -57,10 +57,13 @@ class ShoppingCart extends Component {
         return sum;
     }
 
+    get cartItems(){
+        return this.items;
+    }
+
     constructor(renderHookId) {
         super(renderHookId);
     }
-
     addProduct(product) {
         const updatedItems = [...this.items];
         updatedItems.push(product);
@@ -68,21 +71,30 @@ class ShoppingCart extends Component {
     }
 
     removeProduct(product){
+        
         const updatedItems = [...this.items];
+        console.log(updatedItems);
         if (updatedItems.includes(product)) {
             updatedItems.pop(product);
             this.cartItems = updatedItems;
+            alert(JSON.stringify(product.title) + " deleted from cart");
+        }
+        else{
+            alert(JSON.stringify(product.title) + " is not in cart");
         }
     }
     
     render() {
         const cartEl = this.createRootElement('section', 'cart');
         cartEl.innerHTML = `
-          <h2 class = totalPr>Total: \$${0}</h2>
+          <h2 class = totalAmount>Total: \$${0}</h2>
+          <h2>Items in Cart: <span id= "number">0</span></h2>
           <button>Order Now!</button>
         `;
-        this.totalOutput = cartEl.querySelector('.totalPr');
+        this.totalOutput = cartEl.querySelector('.totalAmount');
       }
+
+
 } 
  
 
@@ -94,14 +106,12 @@ class ProductItem extends Component {
 
     addToCart () {
         ProductPage.addProductToCart(this.product);
-        // console.log('Adding to cart...');
         alert(JSON.stringify(this.product.title) + " added to cart");
         // cart.addProduct();
     } 
     
     removeFromCart () {
-        ProductPage.removeProductFromCart(this.product);
-        alert(JSON.stringify(this.product.title) + " deleted from cart");
+        ProductPage.removeProductFromCart(this.product);  
     }
 
     render() {
@@ -111,9 +121,10 @@ class ProductItem extends Component {
                 <img src ="${this.product.imageUrl}" alt= "${this.product.title}">
                 <div class = "product-items_content">
                     <h2>${this.product.title}</h2>
+                    <p>${this.product.description}</p>
                     <h3>\$${this.product.price}</h3>
                     <h3>${this.product.stock}</h3>
-                    <p>${this.product.description}</p>
+                    
                     <button>Add to Cart</button>
                     <button class ="del">Delete</button>
 
@@ -124,6 +135,10 @@ class ProductItem extends Component {
         addCartButton.addEventListener('click', this.addToCart.bind(this))
         const deleteButton = prodEl.querySelector('.del');
         deleteButton.addEventListener('click', this.removeFromCart.bind(this))
+        addCartButton.addEventListener('click', ()=>{
+            displayNumberOfItems();
+        })
+        deleteButton.addEventListener('click', displayNumberOfItems);
     }
 }
 
@@ -219,10 +234,10 @@ ProductPage.init();
 // productList.render();
 
  
-  // Implementing delete functionality
-//   const productsArray = document.querySelectorAll('.product-item');
-//   const deleteProductButton = document.querySelectorAll('.del');
-//   console.log(deleteProductButton);
+//   delete functionality
+//   const prodArray = document.querySelectorAll('.product-item');
+//   const deleteProdButton = document.querySelectorAll('.del');
+//   console.log(deleteProdButton);
   
 //   function deleteItem(buttonsClass, childClass){
 //     for(var i = 0; i < buttonsClass.length; i++){
@@ -235,5 +250,9 @@ ProductPage.init();
 //     }
 //   }
   
-//   deleteItem(deleteProductButton, productsArray);
+//   deleteItem(deleteProdButton, prodArray);
 
+  function displayNumberOfItems(){
+    const span = document.querySelector("#number");
+     span.innerText = ProductPage.cart.items.length;
+ }
