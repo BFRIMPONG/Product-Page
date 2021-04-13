@@ -83,7 +83,7 @@ class ShoppingCart extends Component {
         if (updatedItems.includes(product)) {
             updatedItems.pop(product);
             this.cartItems = updatedItems;
-            alert(JSON.stringify(product.title) + " is being deleted from cart");
+            alert(JSON.stringify(product.title) + " is being removed from cart");
         }
         else{
             alert(JSON.stringify(product.title) + " is not in cart");
@@ -120,11 +120,10 @@ class ProductItem extends Component {
         ProductPage.removeProductFromCart(this.product);  
     }
 
-    deleteFromProduct() {
-        ProductPage.deleteFromProduct(this.product);
-        alert(JSON.stringify(this.product.title) + " is being deleted from the product list");
-
-    }
+    // deleteProductFromList() {
+    //     ProductPage.deleteFromProduct(this.product);
+    //     alert(JSON.stringify(this.product.title) + " is being deleted from the product list");
+    // }
 
     render() {
         const prodEl = this.createRootElement ('li', 'product-item');
@@ -152,8 +151,8 @@ class ProductItem extends Component {
         })
         deleteButton.addEventListener('click', displayNumberOfItems);
         const remProdButton = prodEl.querySelector('.rem')
-        // remProdButton.addEventListener('click',this.deleteFromProduct.bind(this))
-        remProdButton.addEventListener('click', displayNumberOfItems)
+        // remProdButton.addEventListener('click',this.deleteProductFromList.bind(this))
+        // remProdButton.addEventListener('click', displayNumberOfItems)
 
     }
 }
@@ -168,7 +167,7 @@ class ProductList extends Component {
            999.99,
            'Stock: Available',
            'The phone comes with a 6.10-inch touchscreen display with a resolution of 1170x2532 pixels at a pixel density of 460 pixels per inch (ppi). The iPhone 12 Pro supports wireless charging, as well as proprietary fast charging.',
-           'img/mobilephone.jpg',
+           'img/mobilephone.png',
         ),
         new Product(
             'HP Pavilion x360 Laptop',
@@ -182,14 +181,14 @@ class ProductList extends Component {
             250.00,
             'Stock: Available',
             'More movies and games, music and photos, internet and apps are ready. With TCL Android TV™, discover a new worlds of entertainment with you and your family. ',
-            'img/tv.jpg',
+            'img/tv.png',
         ),
         new Product(
             'Epson Full HD Projector',
             999.99,
             'Stock: Available',
             'Built from the ground up to deliver an exceptionally immersive viewing experience, the Epson Home Cinema 2250 displays vivid, true-to-life content with Best-in-Class Color Brightness1, advanced 3-chip, 3LCD technology and an amazing contrast ratio of up to 70,000:1. The perfect choice for streaming TV shows, sporting events, movies and more, this dynamic projector features Image Enhancement and Frame Interpolation for smooth, crisp images and accepts up to 4K content – for an astounding Full HD picture.',
-            'img/projector.jpg',
+            'img/projector.png',
         ),
         new Product(
             'HP DeskJet 2320 All-in-One Printer',
@@ -240,9 +239,9 @@ class ProductPage {
     static removeProductFromCart(product) {
         this.cart.removeProduct(product);
     }
-    static deleteFromProduct(product){
-        this.cart.removeProduct(product);
-    }
+    // static deleteFromProduct(product){
+    //     this.cart.deleteProductFromList(product);
+    // }
 }
 
 ProductPage.init();
@@ -262,10 +261,10 @@ ProductPage.init();
     for(var i = 0; i < buttonsClass.length; i++){
   
       (function(child){
-        buttonsClass[i].addEventListener('click', function(e){
-          child.parentNode.removeChild(child);
-        //   alert(JSON.stringify(this.product.title) + " is being deleted from the product list");
-        //   displayNumberOfItems();
+        buttonsClass[i].addEventListener('click', function(){
+            displayNumberOfItems();
+            child.parentNode.removeChild(child);
+        // alert(JSON.stringify(product.title) + " is being deleted from the product list");
         },false);
       })(childClass[i]);
     }

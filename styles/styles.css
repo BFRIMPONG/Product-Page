@@ -10,6 +10,7 @@ html {
 body {
   margin: 0;
   padding: 0;
+  background-color: rgba(230, 230, 230, 0.993);
 }
 
 header {
@@ -116,9 +117,10 @@ button:active {
 }
 
 .product-item img {
-  width: 400px;
+  width: 450px;
   height: 300px;
   object-fit: cover;
+  align-content: center;
 }
 
 .product-item img:hover{
