@@ -66,16 +66,25 @@ class ShoppingCart extends Component {
         updatedItems.push(product);
         this.cartItems = updatedItems;
     }
+
+    removeProduct(product){
+        const updatedItems = [...this.items];
+        if (updatedItems.includes(product)) {
+            updatedItems.pop(product);
+            this.cartItems = updatedItems;
+        }
+    }
     
     render() {
         const cartEl = this.createRootElement('section', 'cart');
         cartEl.innerHTML = `
-          <h2>Total: \$${0}</h2>
+          <h2 class = totalPr>Total: \$${0}</h2>
           <button>Order Now!</button>
         `;
-        this.totalOutput = cartEl.querySelector('h2');
+        this.totalOutput = cartEl.querySelector('.totalPr');
       }
-}  
+} 
+ 
 
 class ProductItem extends Component {
     constructor(product, renderHookId){
@@ -86,18 +95,19 @@ class ProductItem extends Component {
     addToCart () {
         ProductPage.addProductToCart(this.product);
         // console.log('Adding to cart...');
-        // alert(JSON.stringify(this.product.title) + " added to cart");
+        alert(JSON.stringify(this.product.title) + " added to cart");
         // cart.addProduct();
     } 
     
-    deleteItem () {
+    removeFromCart () {
+        ProductPage.removeProductFromCart(this.product);
         alert(JSON.stringify(this.product.title) + " deleted from cart");
     }
 
     render() {
         const prodEl = this.createRootElement ('li', 'product-item');
         prodEl.innerHTML = `
-            <div>
+            <div class = "pro">
                 <img src ="${this.product.imageUrl}" alt= "${this.product.title}">
                 <div class = "product-items_content">
                     <h2>${this.product.title}</h2>
@@ -105,15 +115,15 @@ class ProductItem extends Component {
                     <h3>${this.product.stock}</h3>
                     <p>${this.product.description}</p>
                     <button>Add to Cart</button>
-                    <button id ="del">Delete</button>
+                    <button class ="del">Delete</button>
 
                 </div>
             </div>
         `; 
         const addCartButton = prodEl.querySelector('button');
         addCartButton.addEventListener('click', this.addToCart.bind(this))
-        const deleteButton = prodEl.querySelector('#del');
-        deleteButton.addEventListener('click', this.deleteItem.bind(this))
+        const deleteButton = prodEl.querySelector('.del');
+        deleteButton.addEventListener('click', this.removeFromCart.bind(this))
     }
 }
 
@@ -195,6 +205,10 @@ class ProductPage {
     static addProductToCart(product) {
         this.cart.addProduct(product);
     }
+
+    static removeProductFromCart(product) {
+        this.cart.removeProduct(product);
+    }
 }
 
 ProductPage.init();
@@ -203,4 +217,23 @@ ProductPage.init();
 
 // const productList = new ProductList();
 // productList.render();
+
+ 
+  // Implementing delete functionality
+//   const productsArray = document.querySelectorAll('.product-item');
+//   const deleteProductButton = document.querySelectorAll('.del');
+//   console.log(deleteProductButton);
+  
+//   function deleteItem(buttonsClass, childClass){
+//     for(var i = 0; i < buttonsClass.length; i++){
+  
+//       (function(child){
+//         buttonsClass[i].addEventListener('click', function(e){
+//           child.parentNode.removeChild(child);
+//         },false);
+//       })(childClass[i]);
+//     }
+//   }
+  
+//   deleteItem(deleteProductButton, productsArray);
 
