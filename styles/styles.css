@@ -129,8 +129,9 @@ button:active {
 .product-items_content {
   padding: 1rem;
   /* text-align: center; */
-  padding-left: 1rem;
-  border-left:1px solid #540075;
+  padding-left: 3rem;
+  /* border-left:2px solid #7e7f80; */
+  column-gap: 10px;
   
 }
 
@@ -140,6 +141,8 @@ button:active {
 }
 
 .pro{
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  padding: 5px;
   border-radius: 5px;
 } 

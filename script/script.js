@@ -130,7 +130,7 @@ class ProductItem extends Component {
         const prodEl = this.createRootElement ('li', 'product-item');
         prodEl.innerHTML = `
             <div class = "pro">
-                <img src ="${this.product.imageUrl}" alt= "${this.product.title}">
+                <div><img src ="${this.product.imageUrl}" alt= "${this.product.title}"></div>
                 <div class = "product-items_content">
                     <h2>${this.product.title}</h2>
                     <p>${this.product.description}</p>
@@ -187,14 +187,14 @@ class ProductList extends Component {
         new Product(
             'Epson Full HD Projector',
             999.99,
-            'Stock: Avaliable',
-            'Why compromise for anything other than true 3LCD projection? Built from the ground up to deliver an exceptionally immersive viewing experience, the Epson Home Cinema 2250 displays vivid, true-to-life content with Best-in-Class Color Brightness1, advanced 3-chip, 3LCD technology and an amazing contrast ratio of up to 70,000:1. The perfect choice for streaming TV shows, sporting events, movies and more, this dynamic projector features Image Enhancement and Frame Interpolation for smooth, crisp images and accepts up to 4K content – for an astounding Full HD picture. Plus, with built-in Android TV2 and wireless connectivity, you get seamless access to popular streaming services including Hulu, HBO and YouTube™3, right out of the box.',
+            'Stock: Available',
+            'Built from the ground up to deliver an exceptionally immersive viewing experience, the Epson Home Cinema 2250 displays vivid, true-to-life content with Best-in-Class Color Brightness1, advanced 3-chip, 3LCD technology and an amazing contrast ratio of up to 70,000:1. The perfect choice for streaming TV shows, sporting events, movies and more, this dynamic projector features Image Enhancement and Frame Interpolation for smooth, crisp images and accepts up to 4K content – for an astounding Full HD picture.',
             'img/projector.jpg',
         ),
         new Product(
             'HP DeskJet 2320 All-in-One Printer',
             129.99,
-            'Stock: Avaliable',
+            'Stock: Available',
             'The simple way to get the essentials. With seamless setup from PC and dependable printing, you can handle your everyday printing, scanning, and copying needs with an affordable printer. Use HP Smart app for a simple setup, and you are ready to go.',
             'img/printer.png',
          ),
